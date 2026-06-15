@@ -10,6 +10,7 @@ app_file: app.py
 pinned: false
 license: mit
 short_description: Local Gemma that predicts 3D-print failures before they run
+thumbnail: https://huggingface.co/spaces/build-small-hackathon/microfactory-lab/resolve/main/assets/screenshots/print-loop.png
 tags:
   - build-small-hackathon
   - backyard-ai
