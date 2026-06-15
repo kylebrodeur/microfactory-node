@@ -29,6 +29,15 @@ deploy-check: ## deploy/record readiness gate (offline: build + files + creds + 
 deploy:     ## run the gates, then UPDATE the Space files (hf upload) + factory reboot (needs HF_TOKEN)
 	uv run python -m scripts.deploy_preflight --push
 
+publish:    ## deploy to HF Space + sync the public GitHub mirror (needs HF_TOKEN + gh auth)
+	uv run python -m scripts.publish
+
+publish-dry: ## show what publish would change without pushing
+	uv run python -m scripts.publish --dry-run
+
+publish-mirror: ## sync only the public GitHub mirror (skip Space push)
+	uv run python -m scripts.publish --mirror-only
+
 demo:       ## scripted integration run / video-beat dry run
 	uv run python -m scripts.scripted_demo
 
