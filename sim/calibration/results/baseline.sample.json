@@ -1,0 +1,26 @@
+{
+  "dataset": "observations.sample.jsonl",
+  "generated": "2026-06-12",
+  "n_observations": 12,
+  "outcome_accuracy": 0.6667,
+  "quality_mae": 0.2284,
+  "confusion": {
+    "success->success": 6,
+    "failed_sag->failed_sag": 2,
+    "failed_stringing->success": 2,
+    "failed_sag->success": 2
+  },
+  "outcome_counts": {
+    "success": 6,
+    "failed_sag": 4,
+    "failed_stringing": 2
+  },
+  "geometry_counts": {
+    "overhang": 3,
+    "bridge": 2,
+    "stringing": 4,
+    "adhesion": 2,
+    "vase": 1
+  },
+  "fan0_rows": 2
+}

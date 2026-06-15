@@ -1,0 +1,33 @@
+[project]
+name = "chief-engineer"
+version = "0.1.0"
+description = "A small local model that learns 3D printing job by job and predicts print failures before they happen."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "gradio>=6.17,<7",
+    "ollama>=0.4",
+    "pydantic>=2.7",
+    "trimesh>=4.4",
+    "shapely>=2.0",
+]
+
+# Deploy-only extra for the ZeroGPU live path (mirrors requirements-zerogpu.txt).
+# Install locally with:  uv sync --extra zerogpu
+[project.optional-dependencies]
+zerogpu = [
+    "spaces>=0.30",
+    "torch>=2.4",
+    "transformers>=4.49",
+    "accelerate>=0.34",
+]
+
+# pyproject is the source of truth for deps. requirements.txt is kept in sync by
+# hand (only 4 base deps) because the HF Space installs via pip+requirements.txt,
+# not uv. If they drift, regenerate:  uv export --no-hashes --no-dev -o requirements.txt
+
+# Permissive licenses only. Do NOT add OrcaSlicer/PrusaSlicer (AGPL-3.0).
+[tool.chief-engineer]
+model_default = "gemma4:e4b"   # = gemma4:latest. gemma4:4b does NOT exist.
+model_fast = "gemma4:e2b"

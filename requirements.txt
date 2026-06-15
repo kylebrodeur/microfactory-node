@@ -1,0 +1,15 @@
+# The Chief Engineer — HF Space deps. Local-first; permissive licenses only.
+# NEVER add OrcaSlicer/PrusaSlicer (AGPL-3.0).
+gradio>=6.17,<7
+ollama>=0.4          # local Gemma via Ollama (runs on llama.cpp)
+pydantic>=2.7
+trimesh>=4.4         # MIT — mesh load + overhang location (light use)
+shapely>=2.0         # BSD — filled cross-section layers (GEOS bundled in the wheel; Space-safe)
+
+# ── ZeroGPU live inference ──────────────────────────────────────────────
+# Inlined from requirements-zerogpu.txt (build mounts only this file).
+# Set CHIEF_ENGINEER_BACKEND=zerogpu + CHIEF_ENGINEER_HF_MODEL env vars.
+spaces>=0.30          # ZeroGPU @spaces.GPU decorator (HF-provided on the Space)
+torch>=2.4
+transformers>=4.49    # Gemma 3 family support
+accelerate>=0.34

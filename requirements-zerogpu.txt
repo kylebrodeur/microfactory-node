@@ -1,0 +1,17 @@
+# Deploy-only deps for the ZeroGPU live-inference path. NOT in base requirements.txt
+# and NOT needed for local dev / recording (that path uses Ollama).
+#
+# On the published HF Space (ZeroGPU hardware), install base + these, then set:
+#   CHIEF_ENGINEER_BACKEND=zerogpu
+#   CHIEF_ENGINEER_HF_MODEL=<your QAT Gemma checkpoint>     # ⚠ verify on HF
+# See docs/plan/08-ZEROGPU-DEPLOY.md. Leave this OFF until the Branch-A baseline
+# (fallback Space + recorded video) is submitted.
+
+spaces>=0.30          # ZeroGPU @spaces.GPU decorator (HF-provided on the Space)
+torch>=2.4
+transformers>=4.49    # Gemma 3 family support
+accelerate>=0.34
+# bitsandbytes        # ONLY if loading a 4-bit (non-QAT) checkpoint on GPU
+# llama-cpp-python     # ALTERNATIVE: if you pick a QAT *GGUF* release instead of a
+#                      # transformers checkpoint, run that via a llama.cpp path
+#                      # (not llm_zerogpu.py, which is transformers-based).

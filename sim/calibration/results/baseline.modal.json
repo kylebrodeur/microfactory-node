@@ -1,0 +1,26 @@
+{
+  "dataset": "observations.modal.jsonl",
+  "generated": "2026-06-12",
+  "n_observations": 260,
+  "outcome_accuracy": 0.3423,
+  "quality_mae": 0.3205,
+  "confusion": {
+    "success->failed_sag": 112,
+    "success->success": 28,
+    "failed_stringing->success": 59,
+    "failed_sag->failed_sag": 61
+  },
+  "outcome_counts": {
+    "success": 140,
+    "failed_stringing": 59,
+    "failed_sag": 61
+  },
+  "geometry_counts": {
+    "overhang": 149,
+    "bridge": 12,
+    "vase": 9,
+    "adhesion": 31,
+    "stringing": 59
+  },
+  "fan0_rows": 178
+}

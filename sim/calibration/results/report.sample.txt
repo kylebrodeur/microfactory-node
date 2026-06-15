@@ -1,0 +1,13 @@
+observations:     12
+outcome accuracy: 66.7%  (8/12)
+quality MAE:      0.228  (over 12 graded rows)
+confusion (expected → predicted):
+  ✓ success            → success            ×6
+  ✓ failed_sag         → failed_sag         ×2
+  ✗ failed_stringing   → success            ×2
+  ✗ failed_sag         → success            ×2
+mismatches (diagnose which constant to move):
+  · PETG/stringing @ 26°C/65% fan=40 noz=250 ret=2.0: predicted success, real failed_stringing (dominant sim cost: stringing; penalties={'stringing': 0.1})
+  · ABS/adhesion @ 20°C/40% fan=0 noz=248 ret=4.0: predicted success, real failed_sag (dominant sim cost: adhesion; penalties={'adhesion': 0.2})
+  · ABS/overhang @ 25°C/42% fan=80 noz=248 ret=4.0: predicted success, real failed_sag (dominant sim cost: warp; penalties={'warp': 0.24})
+  · TPU/stringing @ 23°C/55% fan=40 noz=228 ret=1.0: predicted success, real failed_stringing (dominant sim cost: stringing; penalties={'stringing': 0.14})

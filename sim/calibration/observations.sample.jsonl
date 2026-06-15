@@ -1,0 +1,17 @@
+# SAMPLE observed print outcomes — REPLACE with your real measurements.
+# Each row: the settings actually used + the room + the REAL outcome (and optional 0-1 quality).
+# Sources to populate this from: the cockpit's manual outcome buttons, your print logs, or the
+# 3D-ADAM defect classifier (defect class -> outcome). The tune-simulator skill scores
+# sim/outcome.py against these and tunes BANDS + penalty terms to fit.
+{"material":"PLA","geometry_type":"overhang","env_temp":22,"env_humidity":45,"nozzle_temp":205,"bed_temp":60,"retraction_mm":5,"fan_pct":100,"first_layer_fan_pct":0,"outcome":"success","quality":0.95}
+{"material":"PLA","geometry_type":"overhang","env_temp":31,"env_humidity":40,"nozzle_temp":215,"bed_temp":60,"retraction_mm":5,"fan_pct":50,"first_layer_fan_pct":0,"outcome":"failed_sag","quality":0.40}
+{"material":"PETG","geometry_type":"bridge","env_temp":29,"env_humidity":62,"nozzle_temp":235,"bed_temp":80,"retraction_mm":4,"fan_pct":40,"first_layer_fan_pct":0,"outcome":"failed_sag","quality":0.45}
+{"material":"PETG","geometry_type":"bridge","env_temp":24,"env_humidity":44,"nozzle_temp":240,"bed_temp":80,"retraction_mm":5,"fan_pct":80,"first_layer_fan_pct":0,"outcome":"success","quality":0.82}
+{"material":"PETG","geometry_type":"stringing","env_temp":26,"env_humidity":65,"nozzle_temp":250,"bed_temp":80,"retraction_mm":2,"fan_pct":40,"first_layer_fan_pct":0,"outcome":"failed_stringing","quality":0.35}
+{"material":"PETG","geometry_type":"stringing","env_temp":23,"env_humidity":38,"nozzle_temp":238,"bed_temp":80,"retraction_mm":6,"fan_pct":40,"first_layer_fan_pct":0,"outcome":"success","quality":0.88}
+{"material":"ABS","geometry_type":"adhesion","env_temp":24,"env_humidity":45,"nozzle_temp":248,"bed_temp":105,"retraction_mm":4,"fan_pct":0,"first_layer_fan_pct":0,"outcome":"success","quality":0.85}
+{"material":"ABS","geometry_type":"adhesion","env_temp":20,"env_humidity":40,"nozzle_temp":248,"bed_temp":85,"retraction_mm":4,"fan_pct":0,"first_layer_fan_pct":0,"outcome":"failed_sag","quality":0.40}
+{"material":"ABS","geometry_type":"overhang","env_temp":25,"env_humidity":42,"nozzle_temp":248,"bed_temp":100,"retraction_mm":4,"fan_pct":80,"first_layer_fan_pct":0,"outcome":"failed_sag","quality":0.42}
+{"material":"TPU","geometry_type":"stringing","env_temp":23,"env_humidity":55,"nozzle_temp":228,"bed_temp":50,"retraction_mm":1,"fan_pct":40,"first_layer_fan_pct":0,"outcome":"failed_stringing","quality":0.38}
+{"material":"TPU","geometry_type":"stringing","env_temp":22,"env_humidity":35,"nozzle_temp":228,"bed_temp":50,"retraction_mm":3,"fan_pct":40,"first_layer_fan_pct":0,"outcome":"success","quality":0.80}
+{"material":"PLA","geometry_type":"vase","env_temp":21,"env_humidity":40,"nozzle_temp":205,"bed_temp":60,"retraction_mm":5,"fan_pct":100,"first_layer_fan_pct":0,"outcome":"success","quality":0.90}
