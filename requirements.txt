@@ -13,3 +13,4 @@ spaces>=0.30          # ZeroGPU @spaces.GPU decorator (HF-provided on the Space)
 torch>=2.4
 transformers>=4.49    # Gemma 3 family support
 accelerate>=0.34
+peft>=0.11            # LoRA adapter loading (microfactory-node-lora-v2 / -v3-qat)

@@ -39,18 +39,10 @@ except Exception:  # pragma: no cover
 
 
 def _zerogpu():
-    """Lazily import the ZeroGPU backend; None unless selected and importable.
-
-    Prefer the LoRA-aware backend when the model switcher has selected an adapter
-    (CHIEF_ENGINEER_LORA_REPO set, read dynamically so a runtime switch takes effect).
-    Otherwise the base ZeroGPU backend. Without this, the switcher's LoRA selections
-    would silently serve the base model — the UI would say one thing and serve another."""
+    """Lazily import the ZeroGPU backend; None unless selected and importable."""
     if _backend() != "zerogpu":
         return None
     try:
-        if os.environ.get("CHIEF_ENGINEER_LORA_REPO"):
-            from . import llm_zerogpu_lora  # heavy deps are import-guarded inside
-            return llm_zerogpu_lora
         from . import llm_zerogpu  # heavy deps are import-guarded inside
         return llm_zerogpu
     except Exception:

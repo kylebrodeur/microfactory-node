@@ -96,7 +96,7 @@ if __import__("os").environ.get("CHIEF_ENGINEER_BACKEND") == "zerogpu":
 MODEL_OPTIONS = [
     "LoRA v3 (QAT E4B)",
     "LoRA v2 (Standard E4B)",
-    "Base (Gemma 4 E4B)",
+    "Base Gemma 4 E4B (ZeroGPU)",
     "Modal API (remote)",
 ]
 
@@ -107,10 +107,9 @@ MODEL_LORA_MAP = {
 
 def _apply_model_choice(model_choice: str):
     """Set environment variables so the next advise() call uses the chosen backend."""
-    if model_choice == "Base (Gemma 4 E4B)":
+    if model_choice == "Base Gemma 4 E4B (ZeroGPU)":
         os.environ.pop("CHIEF_ENGINEER_LORA_REPO", None)
-        os.environ["CHIEF_ENGINEER_MODEL"] = "gemma4:e4b"
-        os.environ["CHIEF_ENGINEER_BACKEND"] = "ollama"
+        os.environ["CHIEF_ENGINEER_BACKEND"] = "zerogpu"
     elif model_choice in MODEL_LORA_MAP:
         os.environ["CHIEF_ENGINEER_LORA_REPO"] = MODEL_LORA_MAP[model_choice]
         os.environ["CHIEF_ENGINEER_BACKEND"] = "zerogpu"

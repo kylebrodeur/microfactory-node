@@ -11,6 +11,7 @@ spaces>=0.30          # ZeroGPU @spaces.GPU decorator (HF-provided on the Space)
 torch>=2.4
 transformers>=4.49    # Gemma 3 family support
 accelerate>=0.34
+peft>=0.11            # LoRA adapter loading (microfactory-node-lora-v2 / -v3-qat)
 # bitsandbytes        # ONLY if loading a 4-bit (non-QAT) checkpoint on GPU
 # llama-cpp-python     # ALTERNATIVE: if you pick a QAT *GGUF* release instead of a
 #                      # transformers checkpoint, run that via a llama.cpp path

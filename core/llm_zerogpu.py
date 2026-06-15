@@ -34,7 +34,7 @@ import json
 import os
 import re
 
-HF_MODEL = os.environ.get("CHIEF_ENGINEER_HF_MODEL", "google/gemma-4-E4B-it")  # matches live gemma4:e4b
+HF_MODEL = os.environ.get("CHIEF_ENGINEER_HF_MODEL", "google/gemma-4-E4B-it")
 _GPU_SECONDS = int(os.environ.get("CHIEF_ENGINEER_GPU_SECONDS", "90"))  # 1st call loads the model
 _MAX_NEW = int(os.environ.get("CHIEF_ENGINEER_MAX_NEW_TOKENS", "512"))
 
@@ -48,7 +48,7 @@ except Exception:  # pragma: no cover
     _HAVE_HF = False
 
 try:
-    import spaces  # type: ignore  (the ZeroGPU package; only present on the Space)
+    import spaces  # type: ignore  # (the ZeroGPU package; only present on the Space)
     _HAVE_SPACES = True
 except Exception:  # pragma: no cover
     _HAVE_SPACES = False
@@ -61,31 +61,54 @@ def _gpu(fn):
     return fn
 
 
-_tok = None
-_model = None
+# Cached state keyed by the active LoRA repo (empty string = base only).
+_state = {"repo": None, "tok": None, "model": None}
+
+
+def _active_lora_repo() -> str:
+    return os.environ.get("CHIEF_ENGINEER_LORA_REPO", "").strip()
 
 
 def _ensure_loaded() -> bool:
     """Load tokenizer + model once. MUST be called inside the @spaces.GPU context on
     ZeroGPU (GPU is only allocated there) — we load to CPU then move to CUDA. No
-    device_map='auto' (discouraged on ZeroGPU; it grabs devices outside the GPU window)."""
-    global _tok, _model
-    if not _HAVE_HF:
-        return False
-    if _model is not None:
+    device_map='auto' (discouraged on ZeroGPU; it grabs devices outside the GPU window).
+
+    Re-loads when the LoRA adapter selection changes, so the model switcher can
+    move between Base, LoRA v2, and LoRA v3 without restarting the Space.
+    """
+    global _state
+    target = _active_lora_repo()
+    if _state["model"] is not None and _state["repo"] == target:
         return True
+    if not _HAVE_HF:
+        print("[zerogpu] _ensure_loaded: heavy deps not available")
+        return False
+
     try:
-        _tok = AutoTokenizer.from_pretrained(HF_MODEL)
-        _model = AutoModelForCausalLM.from_pretrained(
+        tok = AutoTokenizer.from_pretrained(HF_MODEL)
+        base = AutoModelForCausalLM.from_pretrained(
             HF_MODEL,
-            torch_dtype=getattr(torch, "bfloat16", None),
+            dtype=getattr(torch, "bfloat16", None),
             low_cpu_mem_usage=True,
         )
+        if target:
+            from peft import PeftModel
+            model = PeftModel.from_pretrained(base, target)
+        else:
+            model = base
         if torch is not None and torch.cuda.is_available():
-            _model = _model.to("cuda")
+            model = model.to("cuda")
+        _state["repo"] = target
+        _state["tok"] = tok
+        _state["model"] = model
+        print(f"[zerogpu] _ensure_loaded OK, target={target or 'base'}")
         return True
-    except Exception:
-        _tok = _model = None
+    except Exception as e:
+        import traceback
+        print(f"[zerogpu] _ensure_loaded error: {e}")
+        traceback.print_exc()
+        _state = {"repo": None, "tok": None, "model": None}
         return False
 
 
@@ -101,34 +124,46 @@ def backend_status() -> str:
     if not _HAVE_HF:
         return ("<span style='color:var(--ao-yellow);'>●</span> offline fallback · "
                 "transformers/torch absent (deterministic)")
-    loaded = " (loaded)" if _model is not None else " (loads on first analyze)"
+    lora = _active_lora_repo()
+    lora_tag = f" + LoRA({lora.split('/')[-1]})" if lora else ""
+    loaded = " (loaded)" if _state["model"] is not None else " (loads on first analyze)"
     return (f"<span style='color:var(--ao-green);'>●</span> live · "
-            f"{HF_MODEL} (transformers on {where}){loaded}")
+            f"{HF_MODEL}{lora_tag} (transformers on {where}){loaded}")
 
 
 def _build_prompt(system: str, user: str) -> str:
     # Gemma's chat template has no separate system role — fold system into the
     # first user turn (the standard Gemma pattern).
     messages = [{"role": "user", "content": f"{system}\n\n{user}"}]
-    return _tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    return _state["tok"].apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 
 
 @_gpu
 def _generate(system: str, user: str, temperature: float) -> str | None:
-    if not _ensure_loaded():
+    try:
+        if not _ensure_loaded():
+            print("[zerogpu] _ensure_loaded failed")
+            return None
+        prompt = _build_prompt(system, user)
+        model = _state["model"]
+        tok = _state["tok"]
+        if torch is not None and torch.cuda.is_available() and model.device.type != "cuda":
+            model.to("cuda")                       # ZeroGPU: ensure on-GPU during the call
+        inputs = tok(prompt, return_tensors="pt").to(model.device)
+        out = model.generate(
+            **inputs,
+            max_new_tokens=_MAX_NEW,
+            do_sample=temperature > 0,
+            temperature=max(temperature, 1e-4),
+        )
+        text = tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+        print(f"[zerogpu] generated text length={len(text)}")
+        return text
+    except Exception as e:
+        import traceback
+        print(f"[zerogpu] _generate error: {e}")
+        traceback.print_exc()
         return None
-    prompt = _build_prompt(system, user)
-    if torch is not None and torch.cuda.is_available() and _model.device.type != "cuda":
-        _model.to("cuda")                       # ZeroGPU: ensure on-GPU during the call
-    inputs = _tok(prompt, return_tensors="pt").to(_model.device)
-    out = _model.generate(
-        **inputs,
-        max_new_tokens=_MAX_NEW,
-        do_sample=temperature > 0,
-        temperature=max(temperature, 1e-4),
-    )
-    text = _tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
-    return text
 
 
 @_gpu
@@ -138,10 +173,12 @@ def warm() -> str:
     if not _ensure_loaded():
         return backend_status()
     try:
-        if torch is not None and torch.cuda.is_available() and _model.device.type != "cuda":
-            _model.to("cuda")
-        inputs = _tok("ok", return_tensors="pt").to(_model.device)
-        _model.generate(**inputs, max_new_tokens=1, do_sample=False)
+        model = _state["model"]
+        tok = _state["tok"]
+        if torch is not None and torch.cuda.is_available() and model.device.type != "cuda":
+            model.to("cuda")
+        inputs = tok("ok", return_tensors="pt").to(model.device)
+        model.generate(**inputs, max_new_tokens=1, do_sample=False)
     except Exception:
         pass
     return backend_status()
@@ -154,16 +191,22 @@ def chat_json(system: str, user: str, temperature: float = 0.4) -> dict | None:
     """Mirror of llm.chat_json's contract: parsed dict, or None to trigger fallback."""
     try:
         text = _generate(system, user, temperature)
-    except Exception:
+    except Exception as e:
+        import traceback
+        print(f"[zerogpu] chat_json outer error: {e}")
+        traceback.print_exc()
         return None
     if not text:
+        print("[zerogpu] chat_json: no text returned")
         return None
     # Strip code fences, then grab the outermost JSON object.
     text = text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
     m = _JSON.search(text)
     if not m:
+        print(f"[zerogpu] chat_json: no JSON object found in text: {text[:200]!r}")
         return None
     try:
         return json.loads(m.group(0))
-    except Exception:
+    except Exception as e:
+        print(f"[zerogpu] chat_json: json parse error: {e} text: {m.group(0)[:200]!r}")
         return None
