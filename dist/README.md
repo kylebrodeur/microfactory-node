@@ -22,7 +22,7 @@ This is the knowledge that usually lives in one maker's head and dies with the s
 persists, and anyone can read it.
 
 Project: [Live](https://node.microfactory.space) ·
-[Code](https://github.com/kylebrodeur/microfactory-lab).
+[Code](https://github.com/kylebrodeur/microfactory-node).
 
 ## Schema (one JSON object per line)
 

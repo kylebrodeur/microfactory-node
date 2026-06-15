@@ -306,5 +306,5 @@ Full walkthrough — SSH setup, the seven gotchas hit and fixed, the
 - [`MODEL_CARD.md`](MODEL_CARD.md) / [`MODEL_CARD_QAT.md`](MODEL_CARD_QAT.md) — "Try it via GGUF" section linking both paths.
 - [`RUNBOOK.md`](RUNBOOK.md) Step 8 — `ollama pull → cp → push` block with link out to OLLAMA_PUBLISHING.md.
 - [`PIPELINE.md`](PIPELINE.md) §6 — publish-to-ollama.com box added to the pipeline diagram.
-- [`docs/_archive/UI-OVERHAUL-CHANGELOG.md`](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/docs/_archive/UI-OVERHAUL-CHANGELOG.md) — 2026-06-14 session entry includes the publishing step.
-- [`docs/writeup/06-FIELD-NOTES.md`](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/docs/writeup/06-FIELD-NOTES.md) — new field-note #10 ("Distribution is part of the build").
+- [`docs/_archive/UI-OVERHAUL-CHANGELOG.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/_archive/UI-OVERHAUL-CHANGELOG.md) — 2026-06-14 session entry includes the publishing step.
+- [`docs/writeup/06-FIELD-NOTES.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/writeup/06-FIELD-NOTES.md) — new field-note #10 ("Distribution is part of the build").

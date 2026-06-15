@@ -141,9 +141,9 @@ Local dev uses [uv](https://docs.astral.sh/uv); the HF Space installs via `requi
 **Layout:** `app.py` (Space entrypoint) + `test_core.py` at the root; the core library lives in
 `core/`, runnable helpers in `scripts/` (run via `make <target>` or `uv run python -m scripts.<name>`),
 and the simulator / learning-loop / ingestion packages in `sim/`, `learn/`, `ingest/`. See
-[`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/docs/RUNBOOK.md) for the full run-and-test order of operations.
+[`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md) for the full run-and-test order of operations.
 
-**HF Space deployment** (on this Space): [`docs/reference/DEPLOYMENT.md`](docs/reference/DEPLOYMENT.md) + [`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/docs/RUNBOOK.md)
+**HF Space deployment** (on this Space): [`docs/reference/DEPLOYMENT.md`](docs/reference/DEPLOYMENT.md) + [`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md)
 ("Deploy to the Space") cover Space variables, the dual local/Space config, build strategy,
 the `@spaces.GPU`-on-inference-only pattern, and field-log setup.
 
@@ -240,7 +240,7 @@ Storytelling is a judging principle, not a badge.
 - **Demo video:** [<!-- TODO: add video URL after recording -->]()
 - **Social post:** [<!-- TODO: add social post URL after publishing -->]()
 - **Stay in the loop:** an email signup lives at the bottom of the live Space. Opt-in only, clear privacy note, no third-party trackers.
-- **How to use it (guided tour):** [`docs/RUNBOOK.md` §2](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/docs/RUNBOOK.md#2--use-the-tool-the-guided-tour--also-the-judges-tour)
+- **How to use it (guided tour):** [`docs/RUNBOOK.md` §2](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md#2--use-the-tool-the-guided-tour--also-the-judges-tour)
 - **Build story / field notes:** [Hugging Face blog — Microfactory Node field notes](https://huggingface.co/blog/build-small-hackathon/microfactory-lab-field-notes)
 - **Build paper trail (on this Space):**
   - **Model cards:** [`LoRA v2`](learn/finetune/MODEL_CARD.md) · [`LoRA v3 QAT`](learn/finetune/MODEL_CARD_QAT.md)
@@ -249,7 +249,7 @@ Storytelling is a judging principle, not a badge.
   - **Session report + activity trace:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · [`activity.jsonl`](learn/finetune/activity.jsonl)
   - **Calibration:** [`sim/calibration/CALIBRATION-REPORT.md`](sim/calibration/CALIBRATION-REPORT.md) · [`sim/calibration/README.md`](sim/calibration/README.md)
   - **Ingestion + assets:** [`ingest/README.md`](ingest/README.md) · [`assets/screenshots/README.md`](assets/screenshots/README.md) · [`dist/README.md`](dist/README.md) · [`dist/deliberation/README.md`](dist/deliberation/README.md)
-- **Source:** [kylebrodeur/microfactory-lab](https://github.com/kylebrodeur/microfactory-lab)
+- **Source:** [kylebrodeur/microfactory-lab](https://github.com/kylebrodeur/microfactory-node)
 
 ## License
 

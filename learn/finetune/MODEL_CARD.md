@@ -106,7 +106,7 @@ ollama run hf.co/kylebrodeur/microfactory-node-gguf:microfactory-node-v2.gguf
 ```
 
 See the
-[full publishing runbook](https://github.com/kylebrodeur/microfactory-lab/blob/main/chief-engineer/learn/finetune/OLLAMA_PUBLISHING.md)
+[full publishing runbook](https://github.com/kylebrodeur/microfactory-node/blob/main/learn/finetune/OLLAMA_PUBLISHING.md)
 for the merge → quantize → upload pipeline and the QAT-trained v3 sibling
 ([`microfactory-node-lora-v3-qat`](https://huggingface.co/kylebrodeur/microfactory-node-lora-v3-qat)).
 
