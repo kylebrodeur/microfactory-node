@@ -29,48 +29,23 @@ publish them **before** the next `make deploy` so the links resolve.
 >   python -c "import json,sys; n=sum(1 for l in open(sys.argv[1]) if l.strip() and json.loads(l)); print(sys.argv[1], n, 'rows OK')" "$f"
 > done
 >
-> # 2) build-activity dataset
+> # 2) build-activity dataset (card already written in-repo)
 > hf repo info kylebrodeur/chief-engineer-build-activity --repo-type dataset \
 >   || hf repo create kylebrodeur/chief-engineer-build-activity --repo-type dataset -y
 > hf upload kylebrodeur/chief-engineer-build-activity docs/reference/ACTIVITY.jsonl activity.jsonl --repo-type dataset
-> # write the card below to /tmp/build-card.md, then:
-> hf upload kylebrodeur/chief-engineer-build-activity /tmp/build-card.md README.md --repo-type dataset
+> hf upload kylebrodeur/chief-engineer-build-activity docs/reference/dataset-cards/build-activity-README.md README.md --repo-type dataset
 >
-> # 3) finetune-activity dataset
+> # 3) finetune-activity dataset (card already written in-repo)
 > hf repo info kylebrodeur/chief-engineer-finetune-activity --repo-type dataset \
 >   || hf repo create kylebrodeur/chief-engineer-finetune-activity --repo-type dataset -y
 > hf upload kylebrodeur/chief-engineer-finetune-activity learn/finetune/activity.jsonl activity.jsonl --repo-type dataset
-> # write the card below to /tmp/finetune-card.md, then:
-> hf upload kylebrodeur/chief-engineer-finetune-activity /tmp/finetune-card.md README.md --repo-type dataset
+> hf upload kylebrodeur/chief-engineer-finetune-activity docs/reference/dataset-cards/finetune-activity-README.md README.md --repo-type dataset
 > ```
 >
 > Verify both dataset pages render a 4-column table (`timestamp`, `action`, `event`, `details`).
 > The README already links both — no README edit needed; just redeploy the Space after.
 
-### Card — `kylebrodeur/chief-engineer-build-activity` (`/tmp/build-card.md`)
-
-```markdown
----
-license: mit
-tags: [build-small-hackathon, microfactory-node, activity-log, trace]
----
-# Chief Engineer — build activity trace
-A timestamped log of building **Microfactory Node: 3D Printer** (HF Build Small hackathon):
-restructures, bug fixes, deploys, and review passes. One row per event.
-Schema: `timestamp`, `action`, `event`, `details`. Sibling: the fine-tune activity trace
-(`kylebrodeur/chief-engineer-finetune-activity`). Project: https://node.microfactory.space
-```
-
-### Card — `kylebrodeur/chief-engineer-finetune-activity` (`/tmp/finetune-card.md`)
-
-```markdown
----
-license: mit
-tags: [build-small-hackathon, microfactory-node, activity-log, trace, fine-tuning]
----
-# Chief Engineer — fine-tune activity trace
-A timestamped log of the LoRA fine-tune pipeline for **Microfactory Node: 3D Printer**
-(Gemma 4 E4B): dataset generation, training, evaluation, quantization, and publishing to
-HF Hub + ollama.com. One row per event. Schema: `timestamp`, `action`, `event`, `details`.
-Sibling: the build activity trace (`kylebrodeur/chief-engineer-build-activity`).
-```
+The dataset cards are committed in-repo at
+`docs/reference/dataset-cards/build-activity-README.md` and
+`docs/reference/dataset-cards/finetune-activity-README.md` (same pattern as the ledger /
+deliberation / field-log cards) — upload them as each repo's `README.md`, as above.

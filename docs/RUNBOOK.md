@@ -101,8 +101,9 @@ advisor (clearly labeled) rather than erroring.
 
 ## 3 · Deploy to the Space
 
-> **Final submission pass?** Work the [`docs/plan/SUBMISSION-PUNCHDOWN.md`](docs/plan/SUBMISSION-PUNCHDOWN.md) list, and
-> follow [`docs/plan/FINAL-SEED-AND-DEPLOY.md`](docs/plan/FINAL-SEED-AND-DEPLOY.md) — the ordered seed/deploy commands.
+> **Final submission pass?** Work the `docs/plan/SUBMISSION-PUNCHDOWN.md` list, then
+> follow `docs/plan/FINAL-SEED-AND-DEPLOY.md` — the ordered seed/deploy commands. (Both live in
+> the private working repo; they're operator checklists, not part of the public artifact.)
 
 Space: **`build-small-hackathon/microfactory-lab`** · SDK gradio, app at **root**, hardware
 **ZeroGPU**, **HF Pro active** (ample quota → live Gemma on screen). The Space installs from

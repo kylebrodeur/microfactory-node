@@ -35,6 +35,7 @@ MIRROR_NAME = "microfactory-node"
 # Same rules as deploy_preflight.SPACE_IGNORE, plus a .gitignore for the mirror itself.
 MIRROR_IGNORE = [
     "docs/**",
+    "!docs/RUNBOOK.md",
     "!docs/reference/DEPLOYMENT.md",
     "!docs/reference/SIMULATION.md",
     # Dev/recording scripts are not part of the public Space-facing runtime.

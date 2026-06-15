@@ -33,11 +33,16 @@ FIELD_LOG_DATASET = "build-small-hackathon/chief-engineer-field-log"
 # Public-facing learn/finetune docs that stay on the Space: README.md, MODEL_CARD*.md,
 # SERVING.md, OLLAMA_PUBLISHING.md. Internal session/budget/iteration logs stay in the
 # GitHub repo but are kept out of the Space.
+# Docs are internal by default; the public-facing ones in PUBLIC_DOCS are uploaded
+# explicitly after the folder upload (upload_folder's ignore_patterns has no negation,
+# so a "!docs/..." rule here would be a silent no-op).
+PUBLIC_DOCS = [
+    "docs/RUNBOOK.md",
+    "docs/reference/DEPLOYMENT.md",
+    "docs/reference/SIMULATION.md",
+]
 SPACE_IGNORE = [
-    # Docs are internal by default, but two reference docs are public-facing.
     "docs/**",
-    "!docs/reference/DEPLOYMENT.md",
-    "!docs/reference/SIMULATION.md",
     # Dev/recording scripts are not needed at runtime on the Space.
     "scripts/**",
     "spike/**", "field_logs/**", "deliberation_logs/**", ".venv/**", "node_modules/**",
@@ -267,6 +272,15 @@ def push_space(factory_reboot: bool = True) -> None:
         api.upload_folder(repo_id=SPACE, repo_type="space", folder_path=str(ROOT),
                           ignore_patterns=SPACE_IGNORE,
                           commit_message="deploy: update Space from deploy_preflight --push")
+        # Explicitly ship the public-facing docs (excluded by docs/** above).
+        for rel in PUBLIC_DOCS:
+            src = ROOT / rel
+            if src.exists():
+                api.upload_file(path_or_fileobj=str(src), path_in_repo=rel,
+                                repo_id=SPACE, repo_type="space",
+                                commit_message=f"deploy: update {rel}")
+            else:
+                warn("PUSH", f"public doc missing, not uploaded: {rel}")
         ok("PUSH", "files uploaded")
         if factory_reboot:
             api.restart_space(SPACE, factory_reboot=True)
