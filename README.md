@@ -186,7 +186,7 @@ own homework.
 
 *(Badges earned are marked inline — Off the Grid, Llama Champion, Tiny Titan above; Off-Brand in the console skin; the rest below.)*
 
-- **Live:** [node.microfactory.space](https://node.microfactory.space) · fallback: [build-small-hackathon/microfactory-lab](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab)
+- **Live:** [node.microfactory.space](https://node.microfactory.space) · fallback: [build-small-hackathon/microfactory-lab](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab) — hosted in the Build Small hackathon org; `node.microfactory.space` is a custom domain we added because it felt right
 - **Book chapter:** [Microfactory Node — 3D Printer (appendix)](packages/book/src/appendix-microfactory-node.md) — frames this hackathon entry as the first concrete node of the larger Microfactory economy
 - **Open trace datasets on HF Hub** *(Sharing is Caring)*:
   - **Lesson ledger:** [kylebrodeur/chief-engineer-ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger)
