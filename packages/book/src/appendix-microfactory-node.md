@@ -39,11 +39,12 @@ The fine-tune produced four GGUFs, but a GGUF on a Modal volume is not a shippab
 ## Links
 
 - **Live app:** [node.microfactory.space](https://node.microfactory.space)
+- **Demo video:** [Microfactory Node 3D Printer Interface Demo and AI‑Powered Print Optimization](https://cap.so/s/f346fkqk32krv5k)
 - **Source code:** [kylebrodeur/microfactory-node](https://github.com/kylebrodeur/microfactory-node)
 - **Lesson ledger:** [kylebrodeur/chief-engineer-ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger)
 - **Deliberation traces:** [kylebrodeur/chief-engineer-deliberation](https://huggingface.co/datasets/kylebrodeur/chief-engineer-deliberation)
 - **Field log:** [build-small-hackathon/chief-engineer-field-log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log)
 - **Build activity trace:** [kylebrodeur/chief-engineer-build-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-build-activity)
 - **Fine-tune activity trace:** [kylebrodeur/chief-engineer-finetune-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-finetune-activity)
-- **Field notes:** [build-small-hackathon/microfactory-lab-field-notes](https://huggingface.co/datasets/build-small-hackathon/microfactory-lab-field-notes)
+- **Field notes (blog):** [Microfactory Node: Field Notes — building a shop-floor AI on a small local model](https://huggingface.co/blog/build-small-hackathon/microfactory-lab-field-notes) · dataset [`build-small-hackathon/microfactory-lab-field-notes`](https://huggingface.co/datasets/build-small-hackathon/microfactory-lab-field-notes)
 - **Ollama models:** [ollama.com/kylebrodeur](https://ollama.com/kylebrodeur)

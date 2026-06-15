@@ -8,7 +8,7 @@ own work. Model: `gemma4:e4b` local · `google/gemma-4-E4B-it` on the Space (Zer
 
 This is the one operational doc: how to run it, use it, deploy it, and record it. History,
 findings, and the phase log live in `docs/reference/RUNBOOK-FINDINGS.md`; day-by-day plan in
-`docs/plan/`; the recording script in `docs/writeup/02-VIDEO.md`.
+`docs/plan/`; the recording plan + published demo link live in `docs/writeup/02-VIDEO.md`.
 
 ---
 
@@ -215,6 +215,8 @@ full beat list and which beats need Cap Studio polish. One-time deps: `uv pip in
 | `make trace` | export the ledger as a Hub-ready dataset → [kylebrodeur/chief-engineer-ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger) |
 | `make deliberation` | export the multi-persona deliberation as a Hub-ready dataset → [kylebrodeur/chief-engineer-deliberation](https://huggingface.co/datasets/kylebrodeur/chief-engineer-deliberation) |
 | `core/field_log.py` | live Space interactions → [build-small-hackathon/chief-engineer-field-log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log) |
+| `docs/reference/ACTIVITY.jsonl` | build activity trace → [kylebrodeur/chief-engineer-build-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-build-activity) |
+| `learn/finetune/activity.jsonl` | fine-tune pipeline activity trace → [kylebrodeur/chief-engineer-finetune-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-finetune-activity) |
 | `git checkout -- data/lessons.jsonl && rm -f data/policy.json` | reset demo curve (keeps seed + ingested) |
 | `CHIEF_ENGINEER_MODEL=gemma4:e2b` | faster model (env wins over `.env`) |
 

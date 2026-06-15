@@ -194,16 +194,18 @@ own homework.
   - **Field log (live):** [build-small-hackathon/chief-engineer-field-log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log)
   - **Build activity trace:** [kylebrodeur/chief-engineer-build-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-build-activity)
   - **Fine-tune activity trace:** [kylebrodeur/chief-engineer-finetune-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-finetune-activity)
-- **Build story / field notes** *(Field Notes)*: [`build-small-hackathon/microfactory-lab-field-notes`](https://huggingface.co/datasets/build-small-hackathon/microfactory-lab-field-notes)
-- **Demo video:** coming soon (recorded for the submission)
-- **Social post:** coming soon
+  - **Field notes / build story (blog):** [Microfactory Node: Field Notes — building a shop-floor AI on a small local model](https://huggingface.co/blog/build-small-hackathon/microfactory-lab-field-notes) — also available as a dataset: [`build-small-hackathon/microfactory-lab-field-notes`](https://huggingface.co/datasets/build-small-hackathon/microfactory-lab-field-notes)
+- **Demo video:** [Microfactory Node 3D Printer Interface Demo and AI‑Powered Print Optimization](https://cap.so/s/f346fkqk32krv5k) — 7:56 walkthrough of LOAD → SLICE → PRINT → REVIEW
+- **Field notes / build story** *(Field Notes)*: [Microfactory Node: Field Notes — building a shop-floor AI on a small local model](https://huggingface.co/blog/build-small-hackathon/microfactory-lab-field-notes) — the day-by-day build narrative, published on the Hugging Face blog
+- **Social post:** https://x.com/kylebrodeur/status/2066663694918939102 — first X post for @huggingface Build Small
+- **Discord post:** https://discordapp.com/channels/879548962464493619/1501864608565166132/1516223198251843754 — shared in the Build Small / backyard-ai channel
 - **Stay in the loop:** an email signup lives at the bottom of the live Space — opt-in only, clear privacy note, no third-party trackers.
 - **How to use it (guided tour):** [`docs/RUNBOOK.md` §2](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md#2--use-the-tool-the-guided-tour--also-the-judges-tour)
 - **Fine-tune + serving paper trail** *(Well-Tuned)*:
   - **Model cards:** [`LoRA v2`](learn/finetune/MODEL_CARD.md) · [`LoRA v3 QAT`](learn/finetune/MODEL_CARD_QAT.md)
   - **Local run / publish:** [`SERVING.md`](learn/finetune/SERVING.md) · [`OLLAMA_PUBLISHING.md`](learn/finetune/OLLAMA_PUBLISHING.md)
   - **Fine-tune pipeline:** [`learn/finetune/README.md`](learn/finetune/README.md) · [`PIPELINE.md`](learn/finetune/PIPELINE.md) · [`RUNBOOK.md`](learn/finetune/RUNBOOK.md) · [`BUDGET.md`](learn/finetune/BUDGET.md)
-  - **Session report + activity trace:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · [`activity.jsonl`](learn/finetune/activity.jsonl)
+  - **Session report + activity traces:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · fine-tune activity [`activity.jsonl`](learn/finetune/activity.jsonl) / [`kylebrodeur/chief-engineer-finetune-activity`](https://huggingface.co/datasets/kylebrodeur/chief-engineer-finetune-activity) · build activity [`docs/reference/ACTIVITY.jsonl`](docs/reference/ACTIVITY.jsonl) / [`kylebrodeur/chief-engineer-build-activity`](https://huggingface.co/datasets/kylebrodeur/chief-engineer-build-activity)
   - **Calibration:** [`sim/calibration/CALIBRATION-REPORT.md`](sim/calibration/CALIBRATION-REPORT.md) · [`sim/calibration/README.md`](sim/calibration/README.md)
   - **Ingestion + assets:** [`ingest/README.md`](ingest/README.md) · [`assets/screenshots/README.md`](assets/screenshots/README.md) · [`dist/README.md`](dist/README.md) · [`dist/deliberation/README.md`](dist/deliberation/README.md)
 - **Source:** [kylebrodeur/microfactory-node](https://github.com/kylebrodeur/microfactory-node)
