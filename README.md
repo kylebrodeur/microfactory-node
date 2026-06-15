@@ -249,7 +249,7 @@ Storytelling is a judging principle, not a badge.
   - **Session report + activity trace:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · [`activity.jsonl`](learn/finetune/activity.jsonl)
   - **Calibration:** [`sim/calibration/CALIBRATION-REPORT.md`](sim/calibration/CALIBRATION-REPORT.md) · [`sim/calibration/README.md`](sim/calibration/README.md)
   - **Ingestion + assets:** [`ingest/README.md`](ingest/README.md) · [`assets/screenshots/README.md`](assets/screenshots/README.md) · [`dist/README.md`](dist/README.md) · [`dist/deliberation/README.md`](dist/deliberation/README.md)
-- **Source:** [kylebrodeur/microfactory-lab](https://github.com/kylebrodeur/microfactory-node)
+- **Source:** [kylebrodeur/microfactory-node](https://github.com/kylebrodeur/microfactory-node) (public mirror of the build/iteration repo)
 
 ## License
 
