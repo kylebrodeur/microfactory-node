@@ -37,6 +37,8 @@ MIRROR_IGNORE = [
     "docs/**",
     "!docs/reference/DEPLOYMENT.md",
     "!docs/reference/SIMULATION.md",
+    # Dev/recording scripts are not part of the public Space-facing runtime.
+    "scripts/**",
     "spike/**", "field_logs/**", "deliberation_logs/**", ".venv/**", "node_modules/**",
     "recordings/**", "**/__pycache__/**", "**/*.pyc", ".git/**", ".gitignore", ".env", ".agents/**",
     ".codeboarding/**", ".codeboardingignore", "data/policy.json", "data/_generated.glb",

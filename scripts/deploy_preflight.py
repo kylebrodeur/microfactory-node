@@ -38,6 +38,8 @@ SPACE_IGNORE = [
     "docs/**",
     "!docs/reference/DEPLOYMENT.md",
     "!docs/reference/SIMULATION.md",
+    # Dev/recording scripts are not needed at runtime on the Space.
+    "scripts/**",
     "spike/**", "field_logs/**", "deliberation_logs/**", ".venv/**", "node_modules/**",
     "recordings/**", "**/__pycache__/**", "**/*.pyc", ".git/**", ".gitignore", ".env", ".agents/**",
     ".codeboarding/**", ".codeboardingignore", "data/policy.json", "data/_generated.glb",
@@ -88,7 +90,7 @@ def d1b_tests() -> None:
 # ── D2 · everything the Space needs is present ───────────────────────────────
 def d2_files() -> None:
     required = ["app.py", "README.md", "requirements.txt", "core", "ingest", "sim",
-                "scripts", "learn", "data/seed_lessons.jsonl", "data/references.jsonl",
+                "data/seed_lessons.jsonl", "data/references.jsonl",
                 "data/lessons.jsonl"]
     missing = [p for p in required if not (ROOT / p).exists()]
     if missing:

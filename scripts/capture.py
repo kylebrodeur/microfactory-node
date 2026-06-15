@@ -1,8 +1,8 @@
 """Capture beat driver — drive the live app through the demo beats deterministically.
 
-This does NOT record video itself. Use it alongside Cap desktop, or point
-scripts.record.py at an existing Chrome CDP endpoint. The script walks the UI
-slowly with deliberate pauses while YOU (or cap-cli) capture the screen.
+This does NOT record video itself. Use it alongside Cap desktop, or use
+scripts/record-beat.sh to start Cap and drive one beat at a time. The script walks
+the UI slowly with deliberate pauses while YOU (or cap-cli) capture the screen.
 
 The UI tabs are LOAD · SLICE · PRINT · REVIEW. Selectors prefer stable IDs
 over visible text wherever possible, so renames are less likely to break this

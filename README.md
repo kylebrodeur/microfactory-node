@@ -32,16 +32,11 @@ tags:
 
 # Microfactory Node: 3D Printer
 
-*A clever proof of concept that works — not a production system. Its one judged moment is the Chief Engineer reading prior jobs against today's room before the nozzle moves, applying precedent when it fits and saying *"no close precedent"* when it doesn't. Everything else is scaffolding for that.*
-
-**It predicts where a 3D print will fail before it runs, learns from every job, and runs entirely on your own machine for $0 a month.**
-
-<!-- HERO IMAGE (the strongest single frame; capture at ~1600px wide, save to assets/screenshots/). -->
-<!-- Recommended: the BUILD page mid-reasoning: Chief Engineer O'Brien's precedent read on the left,
-     a predicted failure region called out, the filled LAYER cross-section below. -->
-![Microfactory Node: 3D Printer. The Build page, O'Brien reads precedent and flags where the print will fail, before the nozzle moves.](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab/resolve/main/assets/screenshots/hero-build.png)
-
-`Local Gemma via Ollama` · `two agents: O'Brien proposes, La Forge inspects` · `knowledge that compounds` · `honest about what it doesn't know`
+**Build Small hackathon · Backyard AI track.** A small local **Gemma** model that has accumulated
+expert 3D-printing knowledge across prior jobs and applies it **proactively** to a new one.
+Knowledge **compounds**: job N+1 is better-informed than job N. The proactive part is the
+*judgment*: the model evaluates what prior jobs transfer to this one, applies precedent when it
+fits, and says *"no close precedent"* when it doesn't.
 
 ## The Story
 
@@ -49,13 +44,9 @@ My grandfather had a shop. He was an electrical engineer by training — taught 
 
 The Chief Engineer is my attempt at the opposite of that: a small AI that runs on my own machine and learns the craft of 3D printing the way a shop veteran would, job by job, remembering what worked in which conditions, and tells me where a print will fail *before* it runs. The judged moment is simple: it reads the room, recalls the closest prior jobs, and either applies what they teach — *"humidity is higher than the job where this overhang sagged, so I'm raising retraction and adding support"* — or says plainly *"no close precedent"* when nothing close exists. It compresses expert knowledge so it compounds instead of disappearing. Because the knowledge a maker builds over a lifetime shouldn't rent space in someone's cloud — and it shouldn't vanish when the shop closes.
 
-This project is the first node of a larger plan I call the Microfactory: a network of small machines and the people who run them, with a real economy growing around the work. Everything in this demo is built end to end so the idea reads as a working thing, not a sketch. The rest is on the roadmap, not in this demo.
+![Microfactory Node: 3D Printer. The Build page, O'Brien reads precedent and flags where the print will fail, before the nozzle moves.](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab/resolve/main/assets/screenshots/hero-build.png)
 
-**Build Small hackathon · Backyard AI track.** A small local **Gemma** model that has accumulated
-expert 3D-printing knowledge across prior jobs and applies it **proactively** to a new one.
-Knowledge **compounds**: job N+1 is better-informed than job N. The proactive part is the
-*judgment*: the model evaluates what prior jobs transfer to this one, applies precedent when it
-fits, and says *"no close precedent"* when it doesn't.
+`Local Gemma via Ollama` · `two agents: O'Brien proposes, La Forge inspects` · `knowledge that compounds` · `honest about what it doesn't know` · `LCARS console skin (Off-Brand badge)`
 
 ## The loop
 
@@ -86,8 +77,10 @@ This is retrieval plus reflection plus a small learned policy, not fine-tuning, 
 
 ## Run it (fully local, no cloud, no API key)
 
-The best local run uses the fine-tuned Chief Engineer model. Pull it from the public
-Ollama registry or load the same GGUF directly in llama.cpp:
+Runs entirely on your own machine — no cloud, no API key (**Off the Grid**), on Ollama /
+llama.cpp (**Llama Champion**), as a Gemma 4 E-class model that's ~4B effective parameters
+(**Tiny Titan**). The best local run uses the fine-tuned Chief Engineer model — pull it from the
+public Ollama registry or load the same GGUF directly in llama.cpp:
 
 ```bash
 ollama serve &
@@ -143,12 +136,8 @@ Local dev uses [uv](https://docs.astral.sh/uv); the HF Space installs via `requi
 and the simulator / learning-loop / ingestion packages in `sim/`, `learn/`, `ingest/`. See
 [`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md) for the full run-and-test order of operations.
 
-**HF Space deployment** (on this Space): [`docs/reference/DEPLOYMENT.md`](docs/reference/DEPLOYMENT.md) + [`docs/RUNBOOK.md`](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md)
-("Deploy to the Space") cover Space variables, the dual local/Space config, build strategy,
-the `@spaces.GPU`-on-inference-only pattern, and field-log setup.
-
 Falls back to a deterministic advisor if Ollama is unreachable, so the demo never crashes; the
-UI always shows which model ran. Set `CHIEF_ENGINEER_MODEL=gemma4:e2b` if CPU latency is high.
+UI always shows which model ran.
 
 **Resetting demo state.** `data/lessons.jsonl` is now the **durable knowledge base** (12 seed +
 14 ingested lessons, *tracked*, not disposable); the Print loop appends earned/sim lessons to it
@@ -165,18 +154,22 @@ it clears this session's accumulated runs + learned policy back to the curated b
 
 ## Workspaces: the real print workflow
 
-1. **Build**. Define and preview the job: quick-load 3DBenchy, generate a primitive, or drop a
+The app has four tabs, left to right — **LOAD → SLICE → PRINT → REVIEW**:
+
+1. **LOAD**. Define and preview the job: quick-load 3DBenchy, generate a primitive, or drop a
    mesh (the engineer *infers* the part class itself, you don't pick it); choose material; the
    simulated **environment** (temp/humidity/plate position on a Creality Ender 3 V2) populates.
-2. **Slice**. The pre-flight check, **before it prints**: the slicer / layer-by-layer virtual
+   This is also where you load a built model variant via the header switcher (LoRA v3 QAT / v2 /
+   base Gemma 4 / Modal).
+2. **SLICE**. The pre-flight check, **before it prints**: the slicer / layer-by-layer virtual
    print, the engineer's precedent read + reasoning + predicted failure regions, the Spine-validated
    settings + G-code (terminal readout), and a **second opinion** from a separate QA Inspector.
-3. **Print**. Run *this* job through the closed loop and watch quality compound fail→clean.
+3. **PRINT**. Run *this* job through the closed loop and watch quality compound fail→clean.
    **THE PLAN** card frames the run — what's being tested, the Engineer's Spine-validated
    settings, and what La Forge expects: the Engineer proposes → the Spine vetoes → a simulated
    world prints → the **Inspector grades each run** → policy + ledger learn. **OVERRIDE PLAN**
    prints against your own settings; simulate one print, or record a real outcome.
-4. **Review**. The whole job in one place — a **session record** of the inputs, O'Brien's read,
+4. **REVIEW**. The whole job in one place — a **session record** of the inputs, O'Brien's read,
    La Forge's pre-print second opinion, the simulated run + outcome, and next steps — plus the
    live ledger (seed → earned → sim), the capability mesh, and the Inspector's run verdict.
 
@@ -187,41 +180,53 @@ what actually happened and writes the verdict: a second opinion in **Slice**, a 
 **Print**, a run verdict in **Review**. Physics plus a skeptical second voice, never the proposer marking its
 own homework.
 
-<!-- SCREENSHOT: the Print loop: the quality curve climbing fail→clean with La Forge's per-run grades.
-     The compounding payoff in one frame. Save to assets/screenshots/print-loop.png -->
 ![The Print loop: quality climbs from failure to clean over a few iterations as the ledger learns, with La Forge grading each run.](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab/resolve/main/assets/screenshots/print-loop.png)
 
-<!-- ───────────────────────────────────────────────────────────────────────────────────────
-MEDIA TODO (capture from the live Space at ~1600px wide; drop PNGs in assets/screenshots/):
-  • hero-build.png:   Build page mid-reasoning: O'Brien's precedent read + a 3D risk flag + LAYER scrubber (the hero, top).
-  • print-loop.png:   Print, the fail→clean quality curve + La Forge's per-iteration grades (above).
-  • second-opinion.png: Build, La Forge's second-opinion card disputing a plan (the two-agent moment).
-  • studio.png:       Studio, Benchy loaded, material + simulated environment (optional, for the writeup).
-  • review-ledger.png: Review, the ledger growing seed → earned → sim (optional).
-Demo video + social post go in the Links section below once recorded/published.
-──────────────────────────────────────────────────────────────────────────────────────── -->
+## Links
 
+*(Badges earned are marked inline — Off the Grid, Llama Champion, Tiny Titan above; Off-Brand in the console skin; the rest below.)*
 
-## Badges
-
-Off the Grid (local Ollama/Gemma) · Llama Champion (Ollama runs on llama.cpp) ·
-Sharing is Caring ([ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger) ·
-[deliberation](https://huggingface.co/datasets/kylebrodeur/chief-engineer-deliberation) ·
-[field log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log)) ·
-Field Notes (build writeup) · Off-Brand (the Astrometrics console skin) ·
-Tiny Titan (Gemma E-class: ~4B effective, MatFormer) ·
-Well-Tuned (the node is tuned end to end: persona/prompt steering, the deterministic Spine, and
-the Brain/Inspector split; a LoRA on the ledger is the weights-level version, training now).
-Storytelling is a judging principle, not a badge.
+- **Live:** [node.microfactory.space](https://node.microfactory.space) · fallback: [build-small-hackathon/microfactory-lab](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab)
+- **Book chapter:** *Microfactory Node — 3D Printer* (appendix, in progress) — frames this hackathon entry as the first concrete node of the larger Microfactory economy
+- **Open trace datasets on HF Hub** *(Sharing is Caring)*:
+  - **Lesson ledger:** [kylebrodeur/chief-engineer-ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger)
+  - **Deliberation traces:** [kylebrodeur/chief-engineer-deliberation](https://huggingface.co/datasets/kylebrodeur/chief-engineer-deliberation)
+  - **Field log (live):** [build-small-hackathon/chief-engineer-field-log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log)
+  - **Build activity trace:** [kylebrodeur/chief-engineer-build-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-build-activity)
+  - **Fine-tune activity trace:** [kylebrodeur/chief-engineer-finetune-activity](https://huggingface.co/datasets/kylebrodeur/chief-engineer-finetune-activity)
+- **Build story / field notes** *(Field Notes)*: [`build-small-hackathon/microfactory-lab-field-notes`](https://huggingface.co/datasets/build-small-hackathon/microfactory-lab-field-notes)
+- **Demo video:** coming soon (recorded for the submission)
+- **Social post:** coming soon
+- **Stay in the loop:** an email signup lives at the bottom of the live Space — opt-in only, clear privacy note, no third-party trackers.
+- **How to use it (guided tour):** [`docs/RUNBOOK.md` §2](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md#2--use-the-tool-the-guided-tour--also-the-judges-tour)
+- **Fine-tune + serving paper trail** *(Well-Tuned)*:
+  - **Model cards:** [`LoRA v2`](learn/finetune/MODEL_CARD.md) · [`LoRA v3 QAT`](learn/finetune/MODEL_CARD_QAT.md)
+  - **Local run / publish:** [`SERVING.md`](learn/finetune/SERVING.md) · [`OLLAMA_PUBLISHING.md`](learn/finetune/OLLAMA_PUBLISHING.md)
+  - **Fine-tune pipeline:** [`learn/finetune/README.md`](learn/finetune/README.md) · [`PIPELINE.md`](learn/finetune/PIPELINE.md) · [`RUNBOOK.md`](learn/finetune/RUNBOOK.md) · [`BUDGET.md`](learn/finetune/BUDGET.md)
+  - **Session report + activity trace:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · [`activity.jsonl`](learn/finetune/activity.jsonl)
+  - **Calibration:** [`sim/calibration/CALIBRATION-REPORT.md`](sim/calibration/CALIBRATION-REPORT.md) · [`sim/calibration/README.md`](sim/calibration/README.md)
+  - **Ingestion + assets:** [`ingest/README.md`](ingest/README.md) · [`assets/screenshots/README.md`](assets/screenshots/README.md) · [`dist/README.md`](dist/README.md) · [`dist/deliberation/README.md`](dist/deliberation/README.md)
+- **Source:** [kylebrodeur/microfactory-node](https://github.com/kylebrodeur/microfactory-node)
 
 ## What's real vs frontier (honest claims)
 
 - **Built:** retrieval-based compounding knowledge, environment-keyed lessons, a learned parametric
   policy that generalizes across similar conditions, the closed learning loop, the Brain/Spine veto,
-  flags for risky geometry before it prints, fully local Gemma inference, human-reported outcomes, knowledge ingestion from slicer/firmware configs, the two-agent integrity model (proposer + inspector, never the model grading itself).
-  
+  flags for risky geometry before it prints, fully local Gemma 4 inference, human-reported outcomes,
+  knowledge ingestion from slicer/firmware configs, and the two-agent integrity model (proposer +
+  inspector, never the model grading itself). The node is tuned end to end — persona/prompt steering,
+  the deterministic Spine, the Brain/Inspector split, and a LoRA fine-tune on the ledger (**Well-Tuned**).
+
 - **Simulated (the one boundary):** print outcomes, via a deterministic physics-lite stand-in for the
-  printer + sensors (`sim/outcome.py`). The simulator was calibrated against 178 real FDM failure prints. Ingestion and parsing of those corpora ran on **Modal** for about five cents of compute, producing 1,304 material reference facts and 178 cleaned calibration prints. The first pass read 34.2% — the parser only looked at G-code headers, so 178 of 260 rows had fan speed defaulting to zero. After cleaning that, the score settled at 32.6%: correct on clean successes, blind to moderate failures. The gap is structural (the model can't infer true defects without real vision + sensors), not a knob to quietly turn. Rather than fake a prettier number, the gap is documented in `sim/calibration/CALIBRATION-REPORT.md`. The honest signal preserves integrity: the rule that keeps the model from grading itself kept us from tuning the simulator on bad data.
+  printer + sensors (`sim/outcome.py`). The simulator was calibrated against 178 real FDM failure prints.
+  Ingestion and parsing of those corpora ran on **Modal** for about five cents of compute, producing
+  1,304 material reference facts and 178 cleaned calibration prints. The first pass read 34.2% — the
+  parser only looked at G-code headers, so 178 of 260 rows had fan speed defaulting to zero. After
+  cleaning that, the score settled at 32.6%: correct on clean successes, blind to moderate failures. The
+  gap is structural (the model can't infer true defects without real vision + sensors), not a knob to
+  quietly turn. Rather than fake a prettier number, the gap is documented in
+  `sim/calibration/CALIBRATION-REPORT.md`. The same rule that keeps the model from grading itself kept us
+  from tuning the simulator on bad data.
 
 - **In progress:** a LoRA fine-tune on the accumulated ledger (training on Modal), so the craft lives
   in the weights as well as the memory. The live node stays retrieval-based until a held-out eval
@@ -230,32 +235,14 @@ Storytelling is a judging principle, not a badge.
 - **Frontier (not built):** real distributed multi-node execution, physical interfaces (g-code
   streaming, live environmental sensors, camera-based defect detection).
 
-## Links
+## Acknowledgements
 
-- **Live:** [node.microfactory.space](https://node.microfactory.space) · fallback: [build-small-hackathon/microfactory-lab](https://huggingface.co/spaces/build-small-hackathon/microfactory-lab)
-- **Traces on HF Hub:**
-  - **Lesson ledger:** [kylebrodeur/chief-engineer-ledger](https://huggingface.co/datasets/kylebrodeur/chief-engineer-ledger)
-  - **Deliberation traces:** [kylebrodeur/chief-engineer-deliberation](https://huggingface.co/datasets/kylebrodeur/chief-engineer-deliberation)
-  - **Field log (live):** [build-small-hackathon/chief-engineer-field-log](https://huggingface.co/datasets/build-small-hackathon/chief-engineer-field-log)
-- **Demo video:** [<!-- TODO: add video URL after recording -->]()
-- **Social post:** [<!-- TODO: add social post URL after publishing -->]()
-- **Stay in the loop:** an email signup lives at the bottom of the live Space. Opt-in only, clear privacy note, no third-party trackers.
-- **How to use it (guided tour):** [`docs/RUNBOOK.md` §2](https://github.com/kylebrodeur/microfactory-node/blob/main/docs/RUNBOOK.md#2--use-the-tool-the-guided-tour--also-the-judges-tour)
-- **Build story / field notes:** [Hugging Face blog — Microfactory Node field notes](https://huggingface.co/blog/build-small-hackathon/microfactory-lab-field-notes)
-- **Build paper trail (on this Space):**
-  - **Model cards:** [`LoRA v2`](learn/finetune/MODEL_CARD.md) · [`LoRA v3 QAT`](learn/finetune/MODEL_CARD_QAT.md)
-  - **Local run / publish:** [`SERVING.md`](learn/finetune/SERVING.md) · [`OLLAMA_PUBLISHING.md`](learn/finetune/OLLAMA_PUBLISHING.md)
-  - **Fine-tune pipeline:** [`learn/finetune/README.md`](learn/finetune/README.md) · [`PIPELINE.md`](learn/finetune/PIPELINE.md) · [`RUNBOOK.md`](learn/finetune/RUNBOOK.md) · [`BUDGET.md`](learn/finetune/BUDGET.md)
-  - **Session report + activity trace:** [`SESSION_REPORT.md`](learn/finetune/SESSION_REPORT.md) · [`activity.jsonl`](learn/finetune/activity.jsonl)
-  - **Calibration:** [`sim/calibration/CALIBRATION-REPORT.md`](sim/calibration/CALIBRATION-REPORT.md) · [`sim/calibration/README.md`](sim/calibration/README.md)
-  - **Ingestion + assets:** [`ingest/README.md`](ingest/README.md) · [`assets/screenshots/README.md`](assets/screenshots/README.md) · [`dist/README.md`](dist/README.md) · [`dist/deliberation/README.md`](dist/deliberation/README.md)
-- **Source:** [kylebrodeur/microfactory-node](https://github.com/kylebrodeur/microfactory-node) (public mirror of the build/iteration repo)
+Built for the Hugging Face **Build Small** hackathon (Backyard AI track). Model: Google **Gemma 4**
+E-class (E4B/E2B), run locally via [Ollama](https://ollama.com) / llama.cpp; fine-tuning and corpus
+ingestion on [Modal](https://modal.com); UI on [Gradio](https://gradio.app); meshes via
+trimesh / PySLM / manifold3d / pyclipr. Storytelling is a judging principle, not a badge — but it is
+the reason this exists.
 
 ## License
 
-MIT. **No OrcaSlicer/PrusaSlicer code** (AGPL-3.0): trimesh/PySLM/manifold3d/pyclipr only.
-
-## Source
-
-Built in the open. The full build plan, run-and-test runbook, the small-Gemma steering notes,
-and these field notes live in the project's source repository.
+MIT.

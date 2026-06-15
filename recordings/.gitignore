@@ -1,0 +1,10 @@
+# Ignore raw recordings and intermediate artifacts; keep only the manifest template.
+*.cap/
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.aac
+*.ogg
+output/*
+!output/.gitkeep

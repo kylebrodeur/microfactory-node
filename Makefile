@@ -1,4 +1,4 @@
-.PHONY: setup setup-zerogpu assets run test demo bench trace deliberation preflight deploy-check deploy record record-check record-auto
+.PHONY: setup setup-zerogpu assets run test demo bench trace deliberation preflight deploy-check deploy publish publish-dry publish-mirror record-check record-beat
 
 # Local dev uses uv (fast, locked). The HF Space still installs via pip+requirements.txt.
 # Entrypoints: app.py + test_core.py at root; helper scripts live in scripts/ and run
@@ -51,13 +51,8 @@ deliberation: ## export the multi-persona deliberation as a HF Datasets-ready tr
 	uv run python -m scripts.export_deliberation
 
 record-check: ## recording preflight (cap-cli + Space + playwright gates)
-	uv run python -m scripts.record --preflight-only
+	uv run python -m scripts.record_preflight
 
-record:     ## full recording (manual mode): preflight → cap → beat cues → export mp4
-	uv run python -m scripts.record
-
-record-cues: ## beat cues only (no cap) — you record with Cap desktop at high quality
-	uv run python -m scripts.record --mode cues
-
-record-auto: ## recording with Playwright auto-driver (WSL only)
-	uv run python -m scripts.record --mode auto
+record-beat:  ## record one beat: make record-beat BEAT=load
+	@test -n "$(BEAT)" || (echo "Usage: make record-beat BEAT=load"; exit 1)
+	./scripts/record-beat.sh $(BEAT)

@@ -1,0 +1,46 @@
+{
+  "output_resolution": [1708, 1068],
+  "output_fps": 60,
+  "font_file": "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+  "output": "output/microfactory-node-demo.mp4",
+  "segments": [
+    {
+      "type": "camera",
+      "video": "camera/open.mp4"
+    },
+    {
+      "type": "screen",
+      "video": "beats/load.mp4",
+      "audio": "vo/load.wav",
+      "caption": "I give it the part, the material, and the room — it figures out what kind of part this is on its own."
+    },
+    {
+      "type": "screen",
+      "video": "beats/slice.mp4",
+      "audio": "vo/slice.wav",
+      "caption": "It tells me where this print will fail before the nozzle moves, and points at the prior job it's reasoning from."
+    },
+    {
+      "type": "screen",
+      "video": "beats/second.mp4",
+      "audio": "vo/second.wav",
+      "caption": "A separate reviewer grades the plan and can hold the print — it never marks its own homework."
+    },
+    {
+      "type": "screen",
+      "video": "beats/climb.mp4",
+      "audio": "vo/climb.wav",
+      "caption": "Every job makes the next one better. That's the whole point."
+    },
+    {
+      "type": "screen",
+      "video": "beats/review.mp4",
+      "audio": "vo/review.wav",
+      "caption": "The knowledge compounds instead of disappearing."
+    },
+    {
+      "type": "camera",
+      "video": "camera/close.mp4"
+    }
+  ]
+}

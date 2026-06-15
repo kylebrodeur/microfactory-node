@@ -1,0 +1,72 @@
+doc_path,in_hf_upload,linked_in_readme,linked_in_app,linked_in_fieldnotes,public_facing,ready_for_public
+README.md,yes,no,no,no,yes,yes
+assets/screenshots/README.md,yes,yes,no,yes,yes,yes
+dist/README.md,yes,yes,no,yes,yes,yes
+dist/deliberation/README.md,yes,yes,no,yes,yes,yes
+docs/RUNBOOK.md,no,yes,no,no,no,no — excluded from Space upload
+docs/SPACE-DEPLOY.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/01-SUBMISSION-DRAFT.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/03-EXECUTION-PLAN.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/04-BUILD-PROMPT.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/05-ENDGAME.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/06-CONTINGENCY.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/08-ZEROGPU-DEPLOY.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/CHIEF-ENGINEER-PLAN.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/INGESTION-WORKORDER.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/MODAL-WORKORDER.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/PERSONAL-PRINTS-WORKORDER.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/README-bundle.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/RECORDING.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/REVIEW.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/SESSION-REPORT.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/STEP-ZERO-REPO-REVIEW.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/SUBMISSION-AUDIT.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/TODO.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/UI-OVERHAUL-CHANGELOG.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/UI-OVERHAUL-GUIDE-REVIEW.md,no,no,no,no,no,no — excluded from Space upload
+docs/_archive/pattern-review.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/00-MASTER.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/01-OPERATING-PRINCIPLES.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/02-ARCHITECTURE.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/03-SUBMISSION-CHECKLIST.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/07-VIDEO-PRODUCTION-PROMPT.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/FINAL-SEED-AND-DEPLOY.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/ISSUES.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/RESEARCH-NEEDS.md,no,no,no,no,no,no — excluded from Space upload
+docs/plan/SUBMISSION-PUNCHDOWN.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/07-COMPETITIVE-LANDSCAPE.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/DEPLOYMENT.md,yes,yes,no,no,yes,yes
+docs/reference/GEMMA-STEERING.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/INGESTION-GUIDE.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/INGESTION-REPORT.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/KNOWLEDGE-SOURCES.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/LEARNINGS.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/MODAL-USAGE.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/RUNBOOK-FINDINGS.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/SIMULATION.md,yes,no,yes,no,yes,yes
+docs/reference/SOURCE-DEEP-DIVE.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/VOICE.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/dataset-cards/field-log-README.md,no,no,no,no,no,no — excluded from Space upload
+docs/reference/dataset-cards/ledger-README.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/00-STORY.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/01-SUBMISSION.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/02-VIDEO.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/04-SOCIAL-POST.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/05-PROJECTED-OUTCOME.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/06-FIELD-NOTES.md,no,no,no,no,no,no — excluded from Space upload
+docs/writeup/POSTS.md,no,no,no,no,no,no — excluded from Space upload
+ingest/README.md,yes,yes,no,yes,yes,yes
+learn/finetune/BUDGET.md,yes,yes,no,yes,yes,yes
+learn/finetune/MODEL_CARD.md,yes,yes,no,yes,yes,yes
+learn/finetune/MODEL_CARD_QAT.md,yes,yes,no,yes,yes,yes
+learn/finetune/OLLAMA_PUBLISHING.md,yes,yes,no,yes,yes,yes
+learn/finetune/PIPELINE.md,yes,yes,no,yes,yes,yes
+learn/finetune/README.md,yes,yes,no,yes,yes,yes
+learn/finetune/REPORT.md,no,no,no,no,no,no — excluded from Space upload
+learn/finetune/REPORT_v1.md,no,no,no,no,no,no — excluded from Space upload
+learn/finetune/RUNBOOK.md,yes,yes,no,yes,yes,yes
+learn/finetune/SERVING.md,yes,yes,no,yes,yes,yes
+learn/finetune/SESSION_REPORT.md,yes,yes,no,yes,yes,yes
+recordings/EDITING.md,no,no,no,no,no,no — excluded from Space upload
+sim/calibration/CALIBRATION-REPORT.md,yes,yes,no,yes,yes,yes
+sim/calibration/README.md,yes,yes,no,yes,yes,yes

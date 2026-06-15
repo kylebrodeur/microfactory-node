@@ -1,0 +1,23 @@
+# Runtime ledger — now tracked (ingestion artifacts are committed)
+# data/lessons.jsonl — TRACKED
+# data/references.jsonl — TRACKED
+# data/_modal_candidate_lessons.jsonl — TRACKED (Modal Lane-B review file)
+# Learned policy — accumulates at runtime from the simulated loop
+data/policy.json
+# Transient UI artifacts (parametric-generated mesh, on-the-fly GIFs)
+data/_generated.glb
+data/_vprint.gif
+# data/_modal_candidate_lessons.jsonl — TRACKED (Modal Lane-B review file)
+dist/
+field_logs/
+.pi/
+*.cap/
+
+# Sample meshes ARE committed — the HF Space doesn't run make_assets, and
+# benchy.glb can't be regenerated there (needs the STL + a decimation tool).
+# Regenerate the primitives locally with `make assets` if needed.
+
+__pycache__/
+*.pyc
+.venv/
+.env            # local config + secrets (HF_TOKEN). NEVER commit or upload to the Space.
