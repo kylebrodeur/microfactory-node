@@ -74,7 +74,7 @@ A model this size earns trust through constraints, not through scale. The surfac
 
 It runs offline, on your own hardware, for $0 a month. That is not a deployment footnote — it is the point. The knowledge a maker builds over a lifetime should not rent space in someone's cloud, and it should not vanish when the shop closes. The public Space runs the live model on ZeroGPU so you can see the real reasoning. If the GPU is cold or out of quota the node falls back to the deterministic advisor and the banner says so plainly — the reasoning panel never fakes output.
 
-This is retrieval plus reflection plus a small learned policy, not fine-tuning, and that is deliberate. Fine-tuning would bury the knowledge in the weights where you can't watch it move. Retrieval keeps the memory visible: a lesson gets written after one job and pulled back up to shape the next, in plain sight. For craft you want to preserve and show, visible memory beats invisible memory.
+Two memory layers ship, by design. Retrieval plus reflection plus a small learned policy keeps the knowledge **visible**: a lesson gets written after one job and pulled back up to shape the next, in plain sight — for craft you want to preserve and show, legible memory is the point, and it stays the inspectable spine you can watch move. On top of that, a LoRA fine-tune on the accumulated ledger bakes the same craft into the **weights** (the **Well-Tuned** track), and the live Space defaults to it. You don't trade one for the other: retrieval keeps the compounding legible on screen, the fine-tune carries what it learned into the model itself.
 
 ## Run it (fully local, no cloud, no API key)
 
@@ -219,6 +219,8 @@ own homework.
   knowledge ingestion from slicer/firmware configs, and the two-agent integrity model (proposer +
   inspector, never the model grading itself). The node is tuned end to end — persona/prompt steering,
   the deterministic Spine, the Brain/Inspector split, and a LoRA fine-tune on the ledger (**Well-Tuned**).
+  The live Space defaults to the **LoRA v3 (QAT)** model; base Gemma 4 and the v2 LoRA are selectable
+  from the header switcher, and the merged GGUFs are published for one-command local `ollama run`.
 
 - **Simulated (the one boundary):** print outcomes, via a deterministic physics-lite stand-in for the
   printer + sensors (`sim/outcome.py`). The simulator was calibrated against 178 real FDM failure prints.
@@ -231,9 +233,9 @@ own homework.
   `sim/calibration/CALIBRATION-REPORT.md`. The same rule that keeps the model from grading itself kept us
   from tuning the simulator on bad data.
 
-- **In progress:** a LoRA fine-tune on the accumulated ledger (training on Modal), so the craft lives
-  in the weights as well as the memory. The live node stays retrieval-based until a held-out eval
-  earns the swap.
+- **In progress:** continuous retraining — folding the live field-log back into the LoRA as the
+  ledger grows, with a held-out eval gating each promotion so a new adapter only ships when it
+  measurably beats the one in front of it.
 
 - **Frontier (not built):** real distributed multi-node execution, physical interfaces (g-code
   streaming, live environmental sensors, camera-based defect detection).
