@@ -1,0 +1,53 @@
+# The dependency updates for The Chief Engineer.
+#
+# This file exists because Dependabot was running a `uv` job whose
+# dependency snapshot was STALE. The job asked for updates to Pillow,
+# Starlette, setuptools, and starlette, and the run failed with:
+#
+#   dependency_not_found | {
+#     |   "source": "Job dependencies not found in the dependency
+#     |               snapshot: Pillow, Starlette, pillow, setuptools,
+#     |               starlette"
+#   | }
+#
+# None of those four is declared by this repository any more. The
+# current pyproject.toml declares gradio, ollama, pydantic, trimesh,
+# and shapely. The old ones were in the dependency graph's snapshot,
+# left over from a previous version of the project, and a security
+# update job for a package that is not a dependency has nothing to
+# update and cannot succeed.
+#
+# So the config below declares the ecosystem and the directory
+# EXPLICITLY. A declared configuration replaces the graph's
+# guesswork, so the job is built from the manifests that are actually
+# in the repository.
+#
+# THE ECOSYSTEM IS `pip`, NOT `uv`.
+#
+# There is no `uv.lock` in this repository. The Python dependencies
+# are declared in `pyproject.toml` and installed from
+# `requirements.txt`, because the Hugging Face Space installs with
+# pip and a requirements file, not with uv. The `zerogpu` extra
+# mirrors `requirements-zerogpu.txt` for the same reason.
+#
+# So the pip ecosystem, scanning the root, is the ecosystem that
+# matches the manifests that exist. A `uv` entry would look for a
+# `uv.lock` that is not here.
+#
+# The Node side has its own manifest: `package.json` with a
+# `pnpm-lock.yaml`, and playwright as its only dev dependency.
+
+version: 2
+
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
